@@ -1,5 +1,5 @@
 {
-  "name": "mcp-trends-hub",
+  "name": "mcp-trends-hub-dou",
   "version": "1.8.1",
   "type": "module",
   "exports": {
@@ -18,14 +18,14 @@
     "mcp",
     "trends"
   ],
-  "author": "baranwang",
+  "author": "baranwang & JBean",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/baranwang/mcp-trends-hub.git"
+    "url": "https://github.com/Mr-BeanSir/mcp-trends-hub.git"
   },
   "bugs": {
-    "url": "https://github.com/baranwang/mcp-trends-hub/issues"
+    "url": "https://github.com/Mr-BeanSir/mcp-trends-hub/issues"
   },
   "files": [
     "dist"
