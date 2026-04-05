@@ -1,5 +1,11 @@
 # mcp-trends-hub
 
+## 1.8.1
+
+### Patch Changes
+
+- 0a41a92: fix: 修复 readme 自动更新脚本新生成内容和 readme.md 现有内容完全一样时导致报错问题
+
 ## 1.8.0
 
 ### Minor Changes
