@@ -45,10 +45,14 @@ const createContentUpdater = (initialContent: string) => {
       const escapedMarkEnd = markEnd.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const regex = new RegExp(`(${escapedMarkStart}\\r?\\n)([\\s\\S]*?)(\\r?\\n${escapedMarkEnd})`, "g");
       const normalizedNewContent = newContent.replace(/\r?\n/g, newline);
-      const updatedContent = content.replace(regex, `$1${normalizedNewContent}${newline}$3`);
+      let replaced = false;
+      const updatedContent = content.replace(regex, (_match, start, _currentContent, end) => {
+        replaced = true;
+        return `${start}${normalizedNewContent}${newline}${end}`;
+      });
 
-      if (updatedContent === content) {
-        throw new Error(`README marker not found or not replaced: ${markName}`);
+      if (!replaced) {
+        throw new Error(`README marker not found: ${markName}`);
       }
 
       content = updatedContent;
