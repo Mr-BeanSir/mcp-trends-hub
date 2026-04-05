@@ -1,5 +1,15 @@
 # mcp-trends-hub
 
+## 1.8.0
+
+### Minor Changes
+
+- 91e8988: 新增 52im, 衣舞晨风, ilanyu 大佬博客
+
+### Patch Changes
+
+- 91e8988: 更新 MCP-sdk 包解决风险
+
 ## 1.7.0
 
 ### Minor Changes
