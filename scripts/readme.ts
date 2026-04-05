@@ -34,14 +34,24 @@ const getToolsContent = async () => {
 
 const createContentUpdater = (initialContent: string) => {
   let content = initialContent;
+  const newline = initialContent.includes("\r\n") ? "\r\n" : "\n";
 
   return {
     update: async (markName: string, contentGenerator: () => string | Promise<string>): Promise<void> => {
       const markStart = `<!-- ${markName}-start -->`;
       const markEnd = `<!-- ${markName}-end -->`;
       const newContent = await contentGenerator();
-      const regex = new RegExp(`(${markStart}\\n)([\\s\\S]*?)(\\n${markEnd})`, "g");
-      content = content.replace(regex, `$1${newContent}\n$3`);
+      const escapedMarkStart = markStart.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const escapedMarkEnd = markEnd.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(`(${escapedMarkStart}\\r?\\n)([\\s\\S]*?)(\\r?\\n${escapedMarkEnd})`, "g");
+      const normalizedNewContent = newContent.replace(/\r?\n/g, newline);
+      const updatedContent = content.replace(regex, `$1${normalizedNewContent}${newline}$3`);
+
+      if (updatedContent === content) {
+        throw new Error(`README marker not found or not replaced: ${markName}`);
+      }
+
+      content = updatedContent;
     },
     getContent: () => content,
   };
